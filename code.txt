@@ -1,0 +1,180 @@
+#include<stdio.h>
+#include<string.h>
+#include<conio.h>
+#include<stdlib.h>
+
+#define CANDIDATE_COUNT
+
+#define CANDIDATE1 "Aman Kumar"
+#define CANDIDATE2 "Umesh Raj"
+#define CANDIDATE3 "Rachana kumari"
+#define CANDIDATE4 "Prateek prasoon"
+
+int votesCount1=0, votesCount2=0, votesCount3=0, votesCount4=0, spoiledtvotes=0;
+int arr[30]={0};
+int p=1;
+void castVote(){
+//int M[]={1,2,3,4,5,6,7,8,9,10};
+//int data;
+//printf("\nEnter your unique id:-");
+//scanf("%d",&data);
+
+int choice;
+printf("\n\n ### Please choose your Candidate ####\n\n");
+printf("\n 1. %s", CANDIDATE1);
+printf("\n 2. %s", CANDIDATE2);
+printf("\n 3. %s", CANDIDATE3);
+printf("\n 4. %s", CANDIDATE4);
+printf("\n 5. %s", "None of These");
+
+printf("\n\n Input your choice (1 - 5) : ");
+scanf("%d",&choice);
+
+switch(choice){
+    case 1: votesCount1++; break;
+    case 2: votesCount2++; break;
+    case 3: votesCount3++; break;
+    case 4: votesCount4++; break;
+    case 5: spoiledtvotes++; break;
+    default: printf("\n Error: Wrong Choice !! Please retry");
+             //hold the screen
+             getchar();
+}
+printf("\n thanks for vote !!");
+getch();
+}
+int insertSorted(int arr[], int p, int data,  int capacity)
+{
+
+
+    // Cannot insert more elements if n is
+
+    // already more than or equal to capacity
+
+    if (p >= capacity)
+
+       return p;
+
+
+    arr[p] = data;
+
+
+    return (p + 1);
+}
+
+
+void votesCount(){
+printf("\n\n ##### Voting Statics ####");
+printf("\n %s - %d ", CANDIDATE1, votesCount1);
+printf("\n %s - %d ", CANDIDATE2, votesCount2);
+printf("\n %s - %d ", CANDIDATE3, votesCount3);
+printf("\n %s - %d ", CANDIDATE4, votesCount4);
+printf("\n %s - %d ", "None of the above", spoiledtvotes);
+printf("\n");
+getch();
+}
+
+void getLeadingCandidate(){
+    printf("\n\n  #### Leading Candiate ####\n\n");
+    if(votesCount1>votesCount2 && votesCount1>votesCount3 && votesCount1 >votesCount4)
+    printf("[%s]",CANDIDATE1);
+    else if (votesCount2>votesCount3 && votesCount2>votesCount4 && votesCount2 >votesCount1)
+    printf("[%s]",CANDIDATE2);
+    else if(votesCount3>votesCount4 && votesCount3>votesCount2 && votesCount3 >votesCount1)
+    printf("[%s]",CANDIDATE3);
+    else if(votesCount4>votesCount1 && votesCount4>votesCount2 && votesCount4 >votesCount3)
+    printf("[%s]",CANDIDATE4);
+    else
+    printf("----- Warning !!! No-win situation----");
+
+    getch();
+
+}
+
+void seqsearch()
+{
+	int i,n,j,data,x;
+	int M[]={1,2,3,4,5,6,7,8,9,10};
+	printf("You want to vote???");
+	printf("\n1.Yes \n2.No\n");
+	printf("Enter your choice:");
+	scanf("%d",&x);
+	if(x==1)
+	{
+	 printf("\nEnter your unique id:-");
+    scanf("%d",&data);
+    for(j=0;j<10;j++)
+    {
+    if(arr[j]==data)
+    {
+    	printf("\nYou can't vote\nYou have already voted");
+    	getch();
+    	break;
+    }
+    }
+    if(arr[j]!=data)
+    {
+	for(i=0;i<10;i++)
+	{
+		if(M[i]==data)
+		{
+			printf("Welcome\nYou can vote");
+			castVote();
+			break;
+		}
+	}
+	if(M[i]!=data)
+	{
+		printf("\nYou can't vote");
+
+	}
+    }
+	}
+    if(x==2){
+    	printf("\nThank you");
+    	getch();
+    	getch();
+   }
+    if(x!=2 && x!=1)
+    {
+       	printf("Invalid input");
+       	getch();
+    }
+    int capacity = sizeof(arr) / sizeof(arr[0]);
+    insertSorted(arr,p,data,capacity);
+    p=p+1;
+
+}
+
+
+int main()
+{
+int i;
+int choice;
+int arr[30]={0};
+
+do{
+printf("\n\n ###### Welcome to Election/Voting 2022 #####");
+printf("\n\n 1. Cast the Vote");
+printf("\n 2. Find Vote Count");
+printf("\n 3. Find leading Candidate");
+printf("\n 4. Exit");
+
+printf("\n\n Please enter your choice : ");
+scanf("%d", &choice);
+
+switch(choice)
+{
+case 1: seqsearch();getch();break;
+case 2: votesCount();getch();break;
+case 3: getLeadingCandidate();getch();break;
+case 4: exit(0);
+default: printf("\n Error: Invalid Choice");getch();getch();continue;
+}
+}while(choice!=0);
+
+//hold the screen
+getchar();
+
+return 0;
+}
